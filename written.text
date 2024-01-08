@@ -1,0 +1,166 @@
+Project 2
+written.text
+
+Name: Rennie Kipchirchir
+Login ID: Rennie31/5/2001
+
+
+Written #1:  How much time I spent on this assignment
+-----------------------------------------------------
+
+Please estimate of the amount of time you spent on this assignment
+(each week) in hours, e. g., 6.5 hours.  Be as accurate as you can,
+but we know you are not keeping a timer going: just give your best
+estimate.
+
+Week 1 time: Around 14.5 hours
+Week 2 time: Around 16 hours
+
+
+Written #2:  How I tested my code
+---------------------------------
+
+
+Week 1 testing:
+ a. I used print statement on main, using the variable of type card (c33) 
+    already created in main to test my value function. Printed correct val(33).
+ b. To confirm whether I created an empty list, created a CardLinkedList and 
+    asked it to debug print. Printed no value. Hence successfully created empty
+    list.
+ c. Tested whether card c33 created would be added to the list. It was added at
+    index 0. Hence successfully added to empty list. I printed out add to empty
+    list in my add at fun to tell me whether it's adding to empty list. In 
+    order to test whether my add at position (not front/last), I created a for 
+    loop in main, to create 5 cards with values (0 - 5), and passed it to my 
+    add at position function. The used debug print to print out the value and
+    addresses of the card. I also printed added at position (index) in add at 
+    function so that it informs me where the cards were added. My test failed
+    to account for adding a card after I already have a group of cards in my
+    deck. Hence failed this during week one submission, but I corrected it and
+    tested it now works well.
+ d. To test get_card_at;
+    I created a variable of class Card and initialized it to the card returned
+    by get_card_at(). I then printed out the value of the cards using a while 
+    loop, printing the values of the card.
+ e. To test remove_card_at;
+    I created a CardLinkedList variable in main, used it to call remove card at
+    function and printed out using debug print. It updated my list, by removing
+    the card and updating the list. I also asked my remove at function to print
+    out removing from front, if I am removing the cards from front. Initially
+    it failed to remove a card at another position > 0, e.g 3. I had to edit 
+    my code, and changed the realized I had the wrong condition for calling 
+    delete card, when index > 0. Instead of using index, I used count. which
+    always resulted in false.
+ f. To test num cards, I printed out number of cards in my list. Printed 
+    correctly.
+ g. To test Deck class constructor1. Created my main file. Created a card with
+    face value 2. Created a variable of class Deck. And passed in the card 
+    with value 2. The card was added to an empty list. Hence proving my
+    constructor works.
+ h. In order to test put card on top;
+    I created a pointer of type deck and initialized it by passing in new 
+    cards created through a for loop. Every time I passed in a new card, it
+    was added to the front.
+ i. In order to  test draw top card;  wrote a code in the for loop I created 
+    to remove a card. Every time it removed a card, it printed out removing 
+    from front, which was a debugging test code I left in my remove at 
+    function to inform me where the card is being removed from.
+ j. To test constructor 2 for deck class, I used shuffled_deck_small.txt. I 
+    passed in the file to my testing main, and debug printed how the cards 
+    were passed in. It passed in the correct order first card first and last
+    card last. Hence affirmed that my constructor workes. 
+    
+Week 2 testing:
+ a. Testing hand;
+       used the starter code provided in main(test_hand.cpp) to see whether if
+       I only had one card in losing_hand hard if it will print that card 
+       without a punctuation. I also tested if it had multiple cards using
+       winning_hand to see if it will print the cards as specified 
+       (e.g. 1, 2, 3). Removed cards from loosing_hand to test if it will 
+       just print a new line.All printed as expected
+
+b. Tesiing rackoplayer:
+    . Testing RackoPlayer:
+       used the starter code provided in main for testing rackoplayer. I asked
+       my console to print out cards as I played racko. If card is drawn from
+       it printed out drawn this card e.g 2 from deck/ from pile. However the
+       card added to the pile was not the next card to the card I had discarded
+       e.g. (1,3,4) 4 instead of 3. To rectify this, I changed my code to add
+       card 3 to pile then removing the card from hand and update vacant posn
+       with the new card. Also tested what happens if try returning the card
+       I just drew to the pile, card was added to the pile successfully. after
+       coding my has winning hand function, I tested it with test_rackoplayer,
+       it worked as it printed I have a winning hand when all the cards were
+       in ascending order.
+       To test for the case when player 1 has an already winning hand
+
+ c. Testing racko:
+     . I ran the my code on terminal every time I finished a function. If
+       the code compiled without error, it printed out the print out
+       statement in other functions in racko. E.g clean_up_game not yet
+       implemented. 
+     . After completing al functions, ran racko and passed in a file. Game
+       played as expected.
+     . I realized name of the players was not changing after the second 
+       player plays. So I added print out statement and realized after
+       fisrt cycle i is always 1. I wrote a code to subtracted one once
+       i has been modulus in my for loop.
+       e.g.
+       play r is you turn
+       player s is your turn
+       player r is your turn
+       player r is your turn --- wrong 
+       
+       added count > 0 when i % i = 0, This happens when 
+       i = NUMBER_OF_PLAYERS - 1. . Therefore if count > 0, i--;
+       
+       play r is you turn
+       player s is your turn
+       player r is your turn
+       player s is your turn --- right
+       
+    . Final test after everythin worked I ran valgrind to check for memory
+      leaks. NO memory leaked. I was excited ready to upload project but 
+      realized I had five errors and traced it back to rack file 
+      destructor. My error came from deleting players array.
+      I realized doing this is wrong:
+         delete gs_p->players[NUMBER_OF_PLAYERS]
+         players[NUMBER_OF_PLAYERS] = nullptr;
+         
+      so I used a for loop to delete since, I created new twice when
+      initializing the game with player name.
+      
+      this was right-
+     
+      for (unsigned int i = 0; i < NUMBER_OF_PLAYERS; i++){
+          delete gs_p->players[i];
+          gs_p->players[i] = nullptr;
+      } 
+      
+      eliminated all errors
+
+
+Written #3: Your comments on the project
+----------------------------------------
+
+Week 1 (tell us your thoughts after week 1):
+
+I had some trouble understanding linked lists, but I realized the trick was
+understanding where the links are pointing and what happens to the pointer
+if I want to add or remove something from the list. I was a bit frustrated
+when I could not comprehend what i was doing and often took breaks, which 
+helped me think about how linked lists works. Overall I enjoyed the project,
+especially when everything worked well at the end, so satisfying!
+
+
+Week 2 (add additional comments after week 2):
+
+I find it wierd that it was very easy for me to finish rackoplayer.cpp
+and I got frustrated at racko.cpp especially with the destructor in racko
+deleting the players array. But once I solved, I felt a surge in 
+happiness. The project was really nice I enjoyed it. I loved when I Would
+feel so wasted and just burst with joy when I solved a bug in my code.
+
+I enjoyed the project in general. Atleast I have an idea of how to build
+large programs such as games and strategies to follow, and how to approach 
+problems in a systematic order.
